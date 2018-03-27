@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
 #include "Contact.class.hpp"
 
 void	print_search_user(Contact contact) {
@@ -170,13 +171,13 @@ int		main(void) {
 			if (index == 0)
 				std::cout << "No entry. Please add an user." << std::endl;
 			else {
-				int number;
-
 				print_search(contact);
 				std::cout << "Choose index:" << std::endl;
-				if (std::cin >> number && !std::cin.eof())
+				if (std::getline(std::cin, buff) && !std::cin.eof())
 				{
-					if (number < 0 || number > 7)
+					const char *array = buff.c_str();
+					int number = atoi(array);
+					if (number < 0 || number > 7 || (number == 0 && array[0] != '0'))
 						std::cout << "Invalid index." << std::endl;
 					else
 						print_info_user(contact[number]);
@@ -194,16 +195,9 @@ int		main(void) {
 		}
 		else
 		{
-			if (debug == 0)
-				std::cout << "Unknown command \"" << buff <<  "\". Type HELP if you need" << std::endl;
-			else {
-				debug++;
-				if (debug == 2)
-					debug = 0;
-			}
+			std::cout << "Unknown command \"" << buff <<  "\". Type HELP if you need" << std::endl;
 		}
-		if (debug == 0)
-			std::cout << "What do you want to do ?" << std::endl;
+		std::cout << "What do you want to do ?" << std::endl;
 	}
 	std::cout << "Goodbye ! " << std::endl;
 	return 0;
