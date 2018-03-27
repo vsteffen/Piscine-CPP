@@ -5,36 +5,21 @@
 #include "ZombieHorde.hpp"
 #include "Zombie.hpp"
 
-ZombieHorde::ZombieHorde(void) {
+ZombieHorde::ZombieHorde(int N) {
+	std::string name[10] = {"Gusher", "Mourner", "Snacker", "Stinker", "Puker", "Cracker", "Clicker", "Splasher", "Freak", "Sweller"};
 	srand(time(NULL));
+	int max = 4, min = 0;
+	this->_zombie = new Zombie[N];
+	this->_N = N;
+
+	for (int i = 0; i < N; i++) {
+		int randNum = rand()%(max-min + 1) + min;
+		this->_zombie[i].name = name[randNum];
+		this->_zombie[i].type = std::string("Horde");
+		this->_zombie[i].annonce();
+	}
 }
 
 ZombieHorde::~ZombieHorde(void) {
+	delete []this->_zombie ;
 }
-
-void		ZombieHorde::setZombieType(std::string type) {
-	ZombieHorde::type = type;
-	return ;
-}
-
-Zombie* 	ZombieHorde::newZombie(std::string name) {
-	Zombie	*zombie = new Zombie;
-
-	zombie->name = name;
-	zombie->type = ZombieHorde::type;
-	zombie->annonce();
-	return zombie;
-}
-
-void	ZombieHorde::randomChump() const {
-	std::string name[5] = {"Gusher", "Mourner", "Snacker", "Stinker", "Puker"};
-	int max = 4, min = 0;
-	int randNum = rand()%(max-min + 1) + min;
-
-	Zombie	zombie;
-	zombie.name = name[randNum];
-	zombie.type = ZombieHorde::type;
-	zombie.annonce();
-}
-
-std::string		ZombieHorde::type = std::string("default");

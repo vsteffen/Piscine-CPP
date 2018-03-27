@@ -4,9 +4,8 @@
 
 int		main(void) {
 	Zombie		zombie;
-	ZombieHorde	zombieHorde;
-	Zombie		*zombiePtr;
 
+	ZombieHorde	zombieHorde(20);
 
 	return 0;
 }
