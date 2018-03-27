@@ -77,7 +77,7 @@ void print_info_user(Contact contact) {
 	std::cout << "Birthday date: " << contact.getBirthday() << std::endl;
 	std::cout << "Favorite meal: " << contact.getMeal() << std::endl;
 	std::cout << "Underwear color: " << contact.getColor() << std::endl;
-	std::cout << "Darkest secret: " << contact.getSecret() << std::endl;
+	std::cout << "Darkest secret: " << contact.getSecret() << std::endl << std::endl;
 }
 
 void get_new_user(Contact *contact, int index) {
@@ -147,6 +147,7 @@ int		main(void) {
 	std::string		buff;
 	Contact			contact[8];
 	int				index = 0;
+	int				debug = 0;
 
 	std::cout << "Hello ! Welcome on this fabulous phonebook. What do you want to do ?" << std::endl;
 	while (std::getline(std::cin, buff) && !std::cin.eof())
@@ -177,6 +178,7 @@ int		main(void) {
 				else
 					print_info_user(contact[number]);
 			}
+			debug = 1;
 		}
 		else if (buff.compare(std::string("HELP")) == 0)
 		{
@@ -188,9 +190,16 @@ int		main(void) {
 		}
 		else
 		{
-			std::cout << "Unknown command." << buff <<  " Type HELP if you need" << std::endl;
+			if (debug == 0)
+				std::cout << "Unknown command \"" << buff <<  "\". Type HELP if you need" << std::endl;
+			else {
+				debug++;
+				if (debug == 2)
+					debug = 0;
+			}
 		}
-		std::cout << "What do you want to do ?" << std::endl;
+		if (debug == 0)
+			std::cout << "What do you want to do ?" << std::endl;
 	}
 	std::cout << "Goodbye ! " << std::endl;
 	return 0;
