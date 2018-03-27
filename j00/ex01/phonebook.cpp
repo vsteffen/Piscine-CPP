@@ -167,18 +167,22 @@ int		main(void) {
 		}
 		else if (buff.compare(std::string("SEARCH")) == 0)
 		{
-			int number;
+			if (index == 0)
+				std::cout << "No entry. Please add an user." << std::endl;
+			else {
+				int number;
 
-			print_search(contact);
-			std::cout << "Choose index:" << std::endl;
-			if (std::cin >> number && !std::cin.eof())
-			{
-				if (number < 0 || number > 7)
-					std::cout << "Invalid index." << std::endl;
-				else
-					print_info_user(contact[number]);
+				print_search(contact);
+				std::cout << "Choose index:" << std::endl;
+				if (std::cin >> number && !std::cin.eof())
+				{
+					if (number < 0 || number > 7)
+						std::cout << "Invalid index." << std::endl;
+					else
+						print_info_user(contact[number]);
+				}
+				debug = 1;
 			}
-			debug = 1;
 		}
 		else if (buff.compare(std::string("HELP")) == 0)
 		{
