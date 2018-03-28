@@ -7,9 +7,11 @@
 
 ZombieEvent::ZombieEvent(void) {
 	srand(time(NULL));
+	std::cout << "ZombieEvent created" << std::endl;
 }
 
 ZombieEvent::~ZombieEvent(void) {
+	std::cout << "ZombieEvent died" << std::endl;
 }
 
 void		ZombieEvent::setZombieType(std::string type) {
@@ -22,7 +24,6 @@ Zombie* 	ZombieEvent::newZombie(std::string name) {
 
 	zombie->name = name;
 	zombie->type = ZombieEvent::type;
-	zombie->annonce();
 	return zombie;
 }
 
@@ -34,7 +35,7 @@ void	ZombieEvent::randomChump() const {
 	Zombie	zombie;
 	zombie.name = name[randNum];
 	zombie.type = ZombieEvent::type;
-	zombie.annonce();
+	zombie.announce();
 }
 
 std::string		ZombieEvent::type = std::string("default");

@@ -3,9 +3,7 @@
 #include "ZombieHorde.hpp"
 
 int		main(void) {
-	Zombie		zombie;
-
-	ZombieHorde	zombieHorde(20);
-
+	ZombieHorde		zombieHorde(5);
+	zombieHorde.announce();
 	return 0;
 }
