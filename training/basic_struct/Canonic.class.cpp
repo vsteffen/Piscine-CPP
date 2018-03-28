@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Canonic.hpp"
+#include "Canonic.class.hpp"
 
 Canonic::Canonic (void) : _foo( 0 ) {
 	std::cout << "Default constructor called" << std::endl;
@@ -22,8 +22,13 @@ Canonic::~Canonic( void ) {
 	return ;
 }
 
-Canonic::getFoo( void ) const {
+int				Canonic::getFoo( void ) const {
 	return this->_foo;
+}
+
+void			Canonic::setFoo( int foo ) {
+	this->_foo = foo;
+	return ;
 }
 
 Canonic &		Canonic::operator=( Canonic const  & rhs ) {
@@ -33,7 +38,7 @@ Canonic &		Canonic::operator=( Canonic const  & rhs ) {
 	return *this;
 }
 
-std::ostream &		operator<<( std::ostream & o, Canonic const & i) {
+std::ostream &	operator<<( std::ostream & o, Canonic const & i) {
 	o << "The value of _foo is " << i.getFoo();
 
 	return o;

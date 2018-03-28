@@ -3,6 +3,8 @@
 
 # include <iostream>
 
+class	Fixed {
+
 public:
 	Canonic( void );
 	Canonic( int const n);
@@ -12,6 +14,7 @@ public:
 	Canonic & operator=( Canonic const & rhs);
 
 	int		getFoo( void ) const ;
+	void	setFoo( int const foo );
 
 private:
 	int		_foo;
