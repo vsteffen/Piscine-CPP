@@ -13,6 +13,7 @@ Canonic::Canonic( int const n ) _foo( n ) {
 
 Canonic::Canonic ( Canonic const & src ) {
 	std::cout << "Copy constructor called" << std::endl;
+	*this = src;
 	return ;
 }
 
