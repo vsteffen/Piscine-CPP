@@ -1,11 +1,11 @@
-#ifndef FRAGTRAP_CLASS_H
-# define FRAGTRAP_CLASS_H
+#ifndef CLAPTRAP_CLASS_H
+# define CLAPTRAP_CLASS_H
 
 # include <iostream>
 
-class	FragTrap {
+class	ClapTrap {
 
-private:
+protected:
 	std::string		_name;
 	unsigned int	_hitPoints;
 	unsigned int	_maxHitPoints;
@@ -17,23 +17,15 @@ private:
 	unsigned int	_armorDmgRed;
 
 public:
-	FragTrap( void );
-	FragTrap( std::string name );
-	FragTrap( FragTrap const & src );
-	~FragTrap( void );
+	ClapTrap( void );
+	ClapTrap( std::string name );
+	ClapTrap( ClapTrap const & src );
+	~ClapTrap( void );
 
-	FragTrap & operator=( FragTrap const & rhs);
+	ClapTrap & operator=( ClapTrap const & rhs);
 
 	unsigned int	rangedAttack(std::string const & target) const;
 	unsigned int	meleeAttack(std::string const & target) const;
-
-	unsigned int	cryoAttack(std::string const & target) const;
-	unsigned int	rocketAttack(std::string const & target) const;
-	unsigned int	shockAttack(std::string const & target) const;
-	unsigned int	fireAttack(std::string const & target) const;
-	unsigned int	sniperAttack(std::string const & target) const;
-
-	unsigned int	vaulthunter_dot_exe(std::string const & target);
 
 	void	takeDamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);
@@ -58,6 +50,40 @@ public:
 	unsigned int	getRangedAttackDmg( void ) const;
 	unsigned int	getArmorDmgRed( void ) const;
 
+};
+
+class	FragTrap : public ClapTrap {
+
+public:
+	FragTrap( void );
+	FragTrap( std::string name );
+	FragTrap( FragTrap const & src );
+	~FragTrap( void );
+
+	unsigned int	cryoAttack(std::string const & target) const;
+	unsigned int	rocketAttack(std::string const & target) const;
+	unsigned int	shockAttack(std::string const & target) const;
+	unsigned int	fireAttack(std::string const & target) const;
+	unsigned int	sniperAttack(std::string const & target) const;
+
+	unsigned int	vaulthunter_dot_exe(std::string const & target);
+};
+
+class	ScavTrap : public ClapTrap {
+
+public:
+	ScavTrap( void );
+	ScavTrap( std::string name );
+	ScavTrap( ScavTrap const & src );
+	~ScavTrap( void );
+
+	void	danceBattleChallenge(std::string const & target) const;
+	void	shootPacificCreaturesChallenge(std::string const & target) const;
+	void	rollFasterChallenge(std::string const & target) const;
+	void	jokeContestChallenge(std::string const & target) const;
+	void	rallyDeathValleyChallenge(std::string const & target) const;
+
+	void	challengeNewcomer(std::string const & target);
 };
 
 #endif
