@@ -21,8 +21,8 @@ public:
 	void	setRawBits( int const rawBits );
 
 private:
-	int					_fpv;
-	static const int	_fb;
+	int					_rawBits;
+	static const int	_fp;
 
 };
 
