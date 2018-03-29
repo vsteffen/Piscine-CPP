@@ -1,5 +1,5 @@
 #include <iostream>
-#include "FragTrap.class.hpp"
+#include "FragTrap.hpp"
 
 FragTrap::FragTrap (void) : _name( std::string("NoName") ) {
 	std::cout << "FrapTrap <" << this->_name << "> \"This time it'll be awesome, I promise!\"" << std::endl;

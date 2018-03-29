@@ -1,6 +1,7 @@
 #include <iostream>
-// #include <time>
-#include "FragTrap.class.hpp"
+#include <stdlib.h>
+#include <time.h>
+#include "FragTrap.hpp"
 
 int		main() {
 	FragTrap		bobby("Bobby");
