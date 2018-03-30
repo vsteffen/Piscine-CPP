@@ -16,6 +16,8 @@ public:
 	SuperTrap( SuperTrap const & src );
 	~SuperTrap( void );
 
+	// using NinjaTrap::rangedAttack;
+	// using NinjaTrap::meleeAttack;
 	unsigned int	rangedAttack(std::string const & target) const;
 	unsigned int	meleeAttack(std::string const & target) const;
 
