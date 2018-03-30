@@ -5,24 +5,32 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 #include "NinjaTrap.hpp"
+#include "SuperTrap.hpp"
 
 int		main() {
 	srand(time(NULL));
 
-	ClapTrap		morris("Morris");
 	FragTrap		bobby("Bobby");
 	ScavTrap		jacquie("Jacquie");
-
-	std::cout << std::endl;
-
 	NinjaTrap		gladys("Gladys");
 
+
 	std::cout << std::endl;
 
-	gladys.ninjaShoebox(morris);
-	gladys.ninjaShoebox(bobby);
-	gladys.ninjaShoebox(jacquie);
-	gladys.ninjaShoebox(gladys);
+	SuperTrap		billy("Billy");
+
+	std::cout << std::endl;
+
+	billy.rangedAttack("Jacquie");
+	billy.meleeAttack("Jacquie");
+	billy.ninjaShoebox(bobby);
+
+	billy.vaulthunter_dot_exe("Gladys");
+
+	billy.beRepaired(60);
+	billy.takeDamage(1000);
+
+	std::cout << std::endl;
 
 	return 0;
 }

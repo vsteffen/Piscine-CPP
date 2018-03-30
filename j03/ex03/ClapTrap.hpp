@@ -52,38 +52,4 @@ public:
 
 };
 
-class	FragTrap : public ClapTrap {
-
-public:
-	FragTrap( void );
-	FragTrap( std::string name );
-	FragTrap( FragTrap const & src );
-	~FragTrap( void );
-
-	unsigned int	cryoAttack(std::string const & target) const;
-	unsigned int	rocketAttack(std::string const & target) const;
-	unsigned int	shockAttack(std::string const & target) const;
-	unsigned int	fireAttack(std::string const & target) const;
-	unsigned int	sniperAttack(std::string const & target) const;
-
-	unsigned int	vaulthunter_dot_exe(std::string const & target);
-};
-
-class	ScavTrap : public ClapTrap {
-
-public:
-	ScavTrap( void );
-	ScavTrap( std::string name );
-	ScavTrap( ScavTrap const & src );
-	~ScavTrap( void );
-
-	void	danceBattleChallenge(std::string const & target) const;
-	void	shootPacificCreaturesChallenge(std::string const & target) const;
-	void	rollFasterChallenge(std::string const & target) const;
-	void	jokeContestChallenge(std::string const & target) const;
-	void	rallyDeathValleyChallenge(std::string const & target) const;
-
-	void	challengeNewcomer(std::string const & target);
-};
-
 #endif

@@ -203,7 +203,15 @@ unsigned int	FragTrap::getArmorDmgRed( void ) const {
 
 
 FragTrap &		FragTrap::operator=( FragTrap const  & rhs ) {
-	if ( this != &rhs )
-		this->_name = rhs.getName();
+	if ( this != &rhs ) {
+		this->_hitPoints = rhs.getHitPoints();
+		this->_maxHitPoints = rhs.getMaxHitPoints();
+		this->_energyPoints = rhs.getEnergyPoints();
+		this->_maxEnergyPoints = rhs.getMaxEnergyPoints();
+		this->_level = rhs.getLevel();
+		this->_meleeAttackDmg = rhs.getMeleeAttackDmg();
+		this->_rangedAttackDmg = rhs.getRangedAttackDmg();
+		this->_armorDmgRed = rhs.getArmorDmgRed();
+	}
 	return *this;
 }
