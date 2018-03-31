@@ -6,11 +6,9 @@
 class	AWeapon {
 
 protected:
+	std::string		_name;
 	int				_apcost;
 	int				_damage;
-
-private:
-	std::string		_name;
 
 public:
 	AWeapon( void );
@@ -22,7 +20,7 @@ public:
 
 	virtual void	attack(void) const = 0;
 
-	std::string virtual		getName(void) const;
+	std::string const &		getName(void) const;
 	int						getAPCost(void) const;
 	int 					getDamage(void) const;
 

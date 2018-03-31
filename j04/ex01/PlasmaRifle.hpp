@@ -12,11 +12,10 @@ public:
 	PlasmaRifle( PlasmaRifle const & src );
 	virtual ~PlasmaRifle();
 
-	PlasmaRifle & operator=( PlasmaRifle const & rhs);
+	// PlasmaRifle & operator=( PlasmaRifle const & rhs);
+	using	AWeapon::operator=;
 
 	virtual void	attack(void) const;
-
-	std::string virtual		getName(void) const; // care
 
 };
 
