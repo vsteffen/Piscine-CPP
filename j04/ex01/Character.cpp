@@ -43,15 +43,22 @@ void	Character::equip(AWeapon *weapon) {
 }
 
 void	Character::attack(Enemy *enemy) {
-	if (this->_ap >= this->_weapon->getAPCost()) {
-		this->_ap -= this->_weapon->getAPCost();
-		enemy->takeDamage(this->_weapon->getDamage());
-		std::cout << this->_name << " attacks " << enemy->getType() << " with a " << this->_weapon->getName() << std::endl;
-		this->_weapon->attack();
-		if (enemy->getHP() == 0)
-			delete enemy;
+	if (enemy != NULL) {
+		if (this->_ap >= this->_weapon->getAPCost()) {
+			this->_ap -= this->_weapon->getAPCost();
+			enemy->takeDamage(this->_weapon->getDamage());
+			std::cout << this->_name << " attacks " << enemy->getType() << " with a " << this->_weapon->getName() << std::endl;
+			this->_weapon->attack();
+			if (enemy->getHP() == 0) {
+				delete enemy;
+				enemy = NULL;
+			}
+		}
+		else
+			std::cout << "Not enought AP to use " << this->_weapon->getName() << std::endl;
+		return ;
 	}
-	return ;
+	std::cout << "Invalid target." << std::endl;
 }
 
 std::string	const &		Character::getName(void) const {
