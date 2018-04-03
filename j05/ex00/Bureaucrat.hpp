@@ -1,5 +1,5 @@
-#ifndef BUREAUTCRAT_CLASS_H
-# define BUREAUTCRAT_CLASS_H
+#ifndef BUREAUCRAT_H
+# define BUREAUCRAT_H
 
 # include <iostream>
 

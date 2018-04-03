@@ -69,6 +69,7 @@ Bureaucrat::GradeTooLowException::GradeTooLowException( void ) {
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException( GradeTooLowException const & src ) {
+	(void)src;
 	return ;
 }
 
@@ -77,6 +78,7 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException( void ) throw() {
 }
 
 Bureaucrat::GradeTooLowException & 		Bureaucrat::GradeTooLowException::operator=(Bureaucrat::GradeTooLowException const & rhs) {
+	(void)rhs;
 	return *this;
 }
 
@@ -100,6 +102,7 @@ Bureaucrat::GradeTooHighException::~GradeTooHighException( void ) throw() {
 }
 
 Bureaucrat::GradeTooHighException &		Bureaucrat::GradeTooHighException::operator=(Bureaucrat::GradeTooHighException const & rhs) {
+	(void)rhs;
 	return *this;
 }
 

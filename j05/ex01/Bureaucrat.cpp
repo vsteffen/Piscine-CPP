@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat (void) : _name( "NoName" ), _grade( 150 ) {
 	return ;
@@ -48,6 +49,18 @@ void			Bureaucrat::decreaseGrade(void) {
 	return ;
 }
 
+void	Bureaucrat::signForm(Form & form) const {
+	try {
+		form.beSigned(*this);
+		std::cout << "<" << this->_name << "> signs <" << form.getName() << ">" << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "<" << this->_name << "> cannot signs <" << form.getName() << "> because <" << e.what() << ">" << std::endl;
+	}
+	return ;
+}
+
+
 Bureaucrat &		Bureaucrat::operator=( Bureaucrat const  & rhs ) {
 	if ( this != &rhs ) {
 		this->_grade = rhs.getGrade();
@@ -69,6 +82,7 @@ Bureaucrat::GradeTooLowException::GradeTooLowException( void ) {
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException( GradeTooLowException const & src ) {
+	*this = src;
 	return ;
 }
 
@@ -77,6 +91,7 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException( void ) throw() {
 }
 
 Bureaucrat::GradeTooLowException & 		Bureaucrat::GradeTooLowException::operator=(Bureaucrat::GradeTooLowException const & rhs) {
+	(void)rhs;
 	return *this;
 }
 
@@ -100,6 +115,7 @@ Bureaucrat::GradeTooHighException::~GradeTooHighException( void ) throw() {
 }
 
 Bureaucrat::GradeTooHighException &		Bureaucrat::GradeTooHighException::operator=(Bureaucrat::GradeTooHighException const & rhs) {
+	(void)rhs;
 	return *this;
 }
 
