@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-#include <limits>
 
 int		main(int ac, char **av) {
 	if (ac < 2) {
@@ -13,20 +12,23 @@ int		main(int ac, char **av) {
 		void *ptr = static_cast<void*>(av[i]);
 
 		char *ptrChar;
-		long int ln = static_cast<long int>(std::strtol(static_cast<const char*>(ptr), &ptrChar, 10));
+		int n = static_cast<int>(std::strtol(static_cast<const char*>(ptr), &ptrChar, 10));
+		char c = static_cast<char>(n);
 
-		// std::cout << ln << " > " << std::numeric_limits<int>::max() << std::endl;
+		// std::cout << errno << std::endl;
 
-		if (errno == 0 && ln <= std::numeric_limits<int>::max() && ln >= std::numeric_limits<int>::min()) {
-			int n = static_cast<int>(ln);
-			char c = static_cast<char>(n);
+		if (errno == 0) {
 			if (std::isprint(c)) {
 				std::cout << "char: '" << c << "'" << std::endl;
 			}
 			else {
 				std::cout << "char: impossible" << std::endl;
 			}
-			std::cout << "int: " << n << std::endl;
+
+			// if (*ptrChar)
+				// std::cout << "int: impossible" << std::endl;
+			// else
+				std::cout << "int: " << n << std::endl;
 		}
 		else {
 			std::cout << "char: impossible" << std::endl;
