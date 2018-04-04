@@ -24,7 +24,7 @@ int		main(int ac, char **av) {
 				std::cout << "char: '" << c << "'" << std::endl;
 			}
 			else {
-				std::cout << "char: impossible" << std::endl;
+				std::cout << "char: Non displayable" << std::endl;
 			}
 			std::cout << "int: " << n << std::endl;
 		}
