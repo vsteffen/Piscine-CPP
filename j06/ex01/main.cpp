@@ -1,69 +1,66 @@
 #include <iostream>
-#include <iomanip>
-#include <cmath>
+#include <ctime>
+#include <time.h>
 
-int		main(int ac, char **av) {
-	if (ac < 2) {
-		std::cout << "usage: you must send your scalar(s) value(s)" << std::endl;
-		return 1;
-	}
-	for (int i = 1; i < ac; i++) {
+struct	Data {
+	std::string		s1;
+	int				n;
+	std::string		s2;
+};
 
-		void *ptr = static_cast<void*>(av[i]);
+struct	SerializeData {
+	char	s1[9];
+	int 	n;
+	char	s2[9];
+};
 
-		char *ptrChar;
-		int n = static_cast<int>(std::strtol(static_cast<const char*>(ptr), &ptrChar, 10));
-		char c = static_cast<char>(n);
+Data * 		deserialize(void * ptr)
+{
+	SerializeData *		serializeData;
+	Data *				data = new Data;
 
-		// std::cout << errno << std::endl;
+	serializeData = reinterpret_cast<SerializeData*>(ptr);
 
-		if (errno == 0) {
-			if (std::isprint(c)) {
-				std::cout << "char: '" << c << "'" << std::endl;
-			}
-			else {
-				std::cout << "char: impossible" << std::endl;
-			}
+	data->s1 = static_cast<std::string>(serializeData->s1);
+	data->n = static_cast<int>(serializeData->n);
+	data->s2 = static_cast<std::string>(serializeData->s2);
 
-			// if (*ptrChar)
-				// std::cout << "int: impossible" << std::endl;
-			// else
-				std::cout << "int: " << n << std::endl;
-		}
-		else {
-			std::cout << "char: impossible" << std::endl;
-			std::cout << "int: impossible" << std::endl;
-		}
+	return (data);
+}
 
+void	randomStr(char *str)
+{
+	static const char alphanum[] =
+		"0123456789"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		"abcdefghijklmnopqrstuvwxyz";
 
-		double d =  static_cast<double>(std::strtod(static_cast<const char*>(ptr), &ptrChar));
-		float f = static_cast<float>(d);
+	for (int i = 0; i < 8; ++i) {
+        str[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
+    }
+    str[8] = '\0';
+}
 
-		if (errno != ERANGE) {
-			if (errno == 22) {
-				std::cout << "float: " << f << "f" << std::endl;
-				std::cout << "double: " << d << std::endl;
-			}
-			else {
-				float integralFloat;
-				if (std::modf(f, &integralFloat) == 0)
-					std::cout << "float: " << std::fixed << std::setprecision(1) << integralFloat << "f" << std::endl;
-				else
-					std::cout << "float: " << f << "f" << std::endl;
+void *		serialize(void)
+{
+	SerializeData *		data = new SerializeData;
 
-				double integralDouble;
-				if (std::modf(d, &integralDouble) == 0)
-					std::cout << "double: " << std::fixed << std::setprecision(1) << integralDouble << std::endl;
-				else
-					std::cout << "double: " << d << std::endl;
-			}
-		}
-		else {
-			std::cout << "float: impossible" << std::endl;
-			std::cout << "double: impossible" << std::endl;
-		}
-		if (i + 1 < ac)
-			std::cout << std::endl;
-	}
+	randomStr(data->s1);
+	randomStr(data->s2);
+	data->n = rand();
+
+	return reinterpret_cast<void*>(data);
+}
+
+int 		main(void)
+{
+	srand(time(NULL));
+
+	void *	raw = serialize();
+	Data * 	ptrData = deserialize(raw);
+
+	std::cout << ptrData->s1 << std::endl;
+	std::cout << ptrData->n << std::endl;
+	std::cout << ptrData->s2 << std::endl;
 	return 0;
 }
