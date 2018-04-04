@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serialization
+NAME = identify
 
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 

@@ -1,66 +1,68 @@
 #include <iostream>
+// #include "Base.hpp"
 #include <ctime>
 #include <time.h>
 
-struct	Data {
-	std::string		s1;
-	int				n;
-	std::string		s2;
-};
 
-struct	SerializeData {
-	char	s1[9];
-	int 	n;
-	char	s2[9];
-};
+class	Base 					{ public: virtual ~Base( void ) {} };
+class	A : public Base {};
+class	B : public Base {};
+class	C : public Base {};
 
-Data * 		deserialize(void * ptr)
-{
-	SerializeData *		serializeData;
-	Data *				data = new Data;
+void		identify_from_reference( Base & p ) {
+	A * d = dynamic_cast<A*>(&p);
+	if ( d != NULL ) {
+		std::cout << "A" << std::endl;
+		return ;
+	}
 
-	serializeData = reinterpret_cast<SerializeData*>(ptr);
+	B * e = dynamic_cast<B*>(&p);
+	if ( e != NULL ) {
+		std::cout << "B" << std::endl;
+		return ;
+	}
 
-	data->s1 = static_cast<std::string>(serializeData->s1);
-	data->n = static_cast<int>(serializeData->n);
-	data->s2 = static_cast<std::string>(serializeData->s2);
-
-	return (data);
+	std::cout << "C" << std::endl;
+	return ;
 }
 
-void	randomStr(char *str)
-{
-	static const char alphanum[] =
-		"0123456789"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		"abcdefghijklmnopqrstuvwxyz";
-
-	for (int i = 0; i < 8; ++i) {
-        str[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
-    }
-    str[8] = '\0';
+void		identify_from_pointer( Base * p ) {
+	try {
+		(void)dynamic_cast<A&>(*p);
+		std::cout << "A" << std::endl;
+		return ;
+	}
+	catch ( std::bad_cast &bc ) {
+		try {
+			(void)dynamic_cast<B&>(*p);
+			std::cout << "B" << std::endl;
+		}
+		catch ( std::bad_cast &bc ) {
+			std::cout << "C" << std::endl;
+		}
+	}
+	return ;
 }
 
-void *		serialize(void)
-{
-	SerializeData *		data = new SerializeData;
-
-	randomStr(data->s1);
-	randomStr(data->s2);
-	data->n = rand();
-
-	return reinterpret_cast<void*>(data);
+Base *		generate(void) {
+	int random = rand() % 3;
+	if (random == 1) {
+		return new A();
+	}
+	else if (random == 2) {
+		return new B();
+	}
+	return new C();
 }
 
 int 		main(void)
 {
 	srand(time(NULL));
 
-	void *	raw = serialize();
-	Data * 	ptrData = deserialize(raw);
+	Base * baseRand = generate();
 
-	std::cout << ptrData->s1 << std::endl;
-	std::cout << ptrData->n << std::endl;
-	std::cout << ptrData->s2 << std::endl;
+	identify_from_pointer(baseRand);
+	identify_from_reference(*baseRand);
+
 	return 0;
 }
